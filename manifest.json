@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "version": "1.0",
+  "description": "__MSG_extDesc__",
+  "default_locale": "en",
+  "author": "https://x.com/maebahesioru2",
+  "permissions": ["storage"],
+  "background": {
+    "scripts": ["background.js"],
+    "service_worker": "background.js"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "xundo@maebahesioru2",
+      "strict_min_version": "109.0"
+    }
+  },
+  "action": {
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "commands": {
+    "undo": {
+      "suggested_key": { "default": "Ctrl+Z", "mac": "Command+Z" },
+      "description": "戻る"
+    },
+    "redo": {
+      "suggested_key": { "default": "Ctrl+Y", "mac": "Command+Y" },
+      "description": "進む"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://x.com/*", "https://twitter.com/*"],
+      "js": ["lz-string.min.js", "content.js"]
+    }
+  ],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "web_accessible_resources": [{
+    "resources": ["lz-string.min.js"],
+    "matches": ["<all_urls>"]
+  }]
+}
